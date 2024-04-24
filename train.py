@@ -5,7 +5,7 @@ import evaluate
 
 from custom_datasets import get_images, get_dataset, get_data_loaders
 from model import load_model
-from config import ALL_CLASSES, LABEL_COLORS_LIST
+from config import ALL_CLASSES, LABEL_COLORS_LIST, ROOT_PATH
 from engine import train, validate
 from utils import save_model, SaveBestModel, save_plots, SaveBestModelIOU
 from torch.optim.lr_scheduler import MultiStepLR
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr)
 
     train_images, train_masks, valid_images, valid_masks = get_images(
-        root_path='input/road_seg'    
+        root_path=ROOT_PATH
     )
 
     train_dataset, valid_dataset = get_dataset(

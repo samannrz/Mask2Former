@@ -11,13 +11,13 @@ ADE_MEAN = np.array([123.675, 116.280, 103.530]) / 255
 ADE_STD = np.array([58.395, 57.120, 57.375]) / 255
 
 def get_images(root_path):
-    train_images = glob.glob(f"{root_path}/train/images/*")
+    train_images = glob.glob(f"{root_path}/train_images/*")
     train_images.sort()
-    train_masks = glob.glob(f"{root_path}/train/masks/*")
+    train_masks = glob.glob(f"{root_path}/train_masks/*")
     train_masks.sort()
-    valid_images = glob.glob(f"{root_path}/valid/images/*")
+    valid_images = glob.glob(f"{root_path}/valid_images/*")
     valid_images.sort()
-    valid_masks = glob.glob(f"{root_path}/valid/masks/*")
+    valid_masks = glob.glob(f"{root_path}/valid_masks/*")
     valid_masks.sort()
 
     return train_images, train_masks, valid_images, valid_masks
@@ -34,7 +34,7 @@ def train_transforms(img_size):
         A.RandomBrightnessContrast(p=0.2),
         A.Rotate(limit=25),
         A.Normalize(mean=ADE_MEAN, std=ADE_STD)
-    ], is_check_shapes=False)
+    ])
     return train_image_transform
 
 def valid_transforms(img_size):
@@ -46,7 +46,7 @@ def valid_transforms(img_size):
     valid_image_transform = A.Compose([
         A.Resize(img_size[1], img_size[0], always_apply=True),
         A.Normalize(mean=ADE_MEAN, std=ADE_STD)
-    ], is_check_shapes=False)
+    ])
     return valid_image_transform
 
 def collate_fn(batch, image_processor):
