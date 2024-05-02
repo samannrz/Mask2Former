@@ -37,7 +37,7 @@ parser.add_argument(
 )
 parser.add_argument(
     '--imgsz', 
-    default=[512, 416],
+    default=[512, 512],
     type=int,
     nargs='+',
     help='width, height'
